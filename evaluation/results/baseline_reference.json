@@ -1,0 +1,20 @@
+{
+    "baseline_type": "trivial baseline (predict nothing)",
+    "dataset": "38-Cloud",
+    "source_csv": "/content/drive/MyDrive/cloud-detection-project/dataset_split/val_patches.csv",
+    "n_patches_selected": 1700,
+    "n_patches_evaluated": 1700,
+    "n_patches_skipped": 0,
+    "mean": {
+        "IoU": 0.3788235294117647,
+        "Dice": 0.3788235294117647,
+        "Precision": 0.3788235294117647,
+        "Recall": 0.3788235294117647
+    },
+    "std": {
+        "IoU": 0.4852368141219028,
+        "Dice": 0.4852368141219028,
+        "Precision": 0.4852368141219028,
+        "Recall": 0.4852368141219028
+    }
+}
