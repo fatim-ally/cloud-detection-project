@@ -61,8 +61,8 @@ def collect_predictions(model, val_ds, max_patches=None):
         gts.append((y.numpy()[..., 0] > 0.5).astype(np.uint8))
         probs.append(p.astype(np.float32))
         n += len(p)
-        if n % 400 < len(p):
-            print(f"  predicted {n} patches...")
+        if len(rgbs) % 10 == 0:
+            print(f"  predicted {n} patches...", flush=True)
         if max_patches and n >= max_patches:
             break
     rgb, gt, pr = map(np.concatenate, (rgbs, gts, probs))
@@ -189,7 +189,10 @@ def visualize_samples(rgb_all, gt, probs, threshold, indices, path, title):
             (overlay_mask(rgb, pred[i]), f"Overlay (IoU {iou:.3f})"),
         ]
         for ax, (img, label) in zip(row, panels):
-            ax.imshow(img, cmap="gray" if img.ndim == 2 else None)
+            if img.ndim == 2:   # fixed 0-1 scale so an all-cloud mask shows white, not black
+                ax.imshow(img, cmap="gray", vmin=0, vmax=1)
+            else:
+                ax.imshow(img)
             ax.set_title(label, fontsize=9); ax.axis("off")
     fig.suptitle(f"{title} | threshold = {threshold:.2f}")
     fig.tight_layout()
@@ -208,6 +211,9 @@ def main():
     ap.add_argument("--batch_size", type=int, default=8)
     ap.add_argument("--max_patches", type=int, default=None,
                     help="Optional: only use the first N val patches (quick test)")
+    ap.add_argument("--subsample", type=int, default=None,
+                    help="Optional: use a RANDOM sample of N val patches (seed 42). "
+                         "For slow CPU runs; the full val set is better when a GPU is available.")
     args = ap.parse_args()
 
     out = Path(args.out_dir)
@@ -215,6 +221,12 @@ def main():
 
     means, stds = load_band_stats(args.stats_json)
     val_csv = os.path.join(args.split_dir, "val_patches.csv")
+    if args.subsample:
+        df = pd.read_csv(val_csv)
+        df = df.sample(min(args.subsample, len(df)), random_state=42)
+        val_csv = str(out / "val_subsample.csv")
+        df.to_csv(val_csv, index=False)
+        print(f"Using a random sample of {len(df)} val patches (seed 42).")
     val_ds = build_dataset(val_csv, means, stds, has_mask=True,
                            batch_size=args.batch_size, shuffle=False)
 
@@ -259,4 +271,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main();
