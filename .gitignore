@@ -37,3 +37,12 @@ Thumbs.db
 
 # --- Colab / Drive mount artifacts ---
 drive/
+
+
+model/
+*.keras
+*.h5
+
+# Ignore raw data files, but keep interface sample patches
+*.npz
+!interface/samples/*.npz
