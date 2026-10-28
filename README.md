@@ -2,11 +2,10 @@
 
 Software Project Management (Course 458) — University of Karachi
 Instructor: Dr. Humera Azam | Group 4
+---
 
 #FOR PEOPLE WHO WANT TO USE THE WEB APP ON THEIR LOCAL MACHINE
 Follow these instructions to set up and run the U-Net Satellite Patch Segmentation app on your local machine (macOS / Apple Silicon recommended).
-
----
 
 ### 1. Prerequisites & Environment Setup
 macOS / Linux: source .venv/bin/activate
