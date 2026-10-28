@@ -3,6 +3,31 @@
 Software Project Management (Course 458) — University of Karachi
 Instructor: Dr. Humera Azam | Group 4
 
+#FOR PEOPLE WHO WANT TO USE THE WEB APP ON THEIR LOCAL MACHINE
+Follow these instructions to set up and run the U-Net Satellite Patch Segmentation app on your local machine (macOS / Apple Silicon recommended).
+
+---
+
+### 1. Prerequisites & Environment Setup
+macOS / Linux: source .venv/bin/activate
+
+Windows (Command Prompt / Git Bash): .venv\Scripts\activate
+
+Windows (PowerShell): .venv\Scripts\Activate.ps1
+
+1. **Clone the Repository:**
+   ```bash
+   git clone <repository-url>
+   cd spm
+2.**Create and Activate a Virtual Environment:**  
+   python3 -m venv .venv
+   source .venv/bin/activate
+3.**Install Dependencies:**
+   pip install --upgrade pip
+   pip install streamlit tensorflow numpy pillow matplotlib pandas
+4.**Run the streamlit app:**
+   streamlit run interface/app.py --server.fileWatcherType none
+   
 ## Team
 
 | Name | Role |
@@ -84,8 +109,4 @@ cloud-detection-project/
 - Tag a teammate for review if your change affects their component
   (e.g. changes to `model/` that affect `interface/`)
 
-## Current status
 
-See the team's Phase 1 report (`docs/phase1_report.docx`) for locked
-technical decisions: dataset (38-Cloud), model (4-channel U-Net),
-primary metric (IoU), interface (Streamlit).
