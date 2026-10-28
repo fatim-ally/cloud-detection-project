@@ -4,29 +4,62 @@ Software Project Management (Course 458) — University of Karachi
 Instructor: Dr. Humera Azam | Group 4
 ---
 
-#FOR PEOPLE WHO WANT TO USE THE WEB APP ON THEIR LOCAL MACHINE
-Follow these instructions to set up and run the U-Net Satellite Patch Segmentation app on your local machine (macOS / Apple Silicon recommended).
+# Local Setup Guide
 
-### 1. Prerequisites & Environment Setup
-macOS / Linux: source .venv/bin/activate
+Follow these instructions to set up and run the U-Net Satellite Patch Segmentation app on your local machine.
 
-Windows (Command Prompt / Git Bash): .venv\Scripts\activate
+---
 
-Windows (PowerShell): .venv\Scripts\Activate.ps1
+## 1. Prerequisites & Environment Setup
 
 1. **Clone the Repository:**
    ```bash
    git clone <repository-url>
    cd spm
-2.**Create and Activate a Virtual Environment:**  
-   python3 -m venv .venv
-   source .venv/bin/activate
-3.**Install Dependencies:**
-   pip install --upgrade pip
-   pip install streamlit tensorflow numpy pillow matplotlib pandas
-4.**Run the streamlit app:**
-   streamlit run interface/app.py --server.fileWatcherType none
-   
+   Create a Virtual Environment:
+
+Bash
+python3 -m venv .venv
+Activate the Virtual Environment:
+
+macOS / Linux:
+
+Bash
+source .venv/bin/activate
+Windows (Command Prompt / Git Bash):
+
+DOS
+.venv\Scripts\activate
+Windows (PowerShell):
+
+PowerShell
+.venv\Scripts\Activate.ps1
+Install Dependencies:
+
+Bash
+pip install --upgrade pip
+pip install streamlit tensorflow numpy pillow matplotlib pandas
+File & Directory Requirements
+Ensure your workspace contains the required sample patches and trained model weights before running:
+
+Plaintext
+spm/
+├── interface/
+│   ├── app.py
+│   ├── segmentation_metrics.py
+│   └── samples/                    <-- Ensure 12 .npz sample patches are here
+│       ├── patch_105_6_by_5...npz
+│       └── ...
+└── model/
+    ├── full_best.keras             <-- Place U-Net model checkpoint here
+    └── band_stats.json             <-- Place normalization statistics here
+3. Running the Streamlit App
+Launch the application using Streamlit:
+
+Bash
+streamlit run interface/app.py --server.fileWatcherType none
+The interface will automatically open in your default browser at http://localhost:8501.
+
 ## Team
 
 | Name | Role |
