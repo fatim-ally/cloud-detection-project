@@ -4,61 +4,7 @@ Software Project Management (Course 458) — University of Karachi
 Instructor: Dr. Humera Azam | Group 4
 ---
 
-# Local Setup Guide
 
-Follow these instructions to set up and run the U-Net Satellite Patch Segmentation app on your local machine.
-
----
-
-## 1. Prerequisites & Environment Setup
-
-1. **Clone the Repository:**
-   ```bash
-   git clone <repository-url>
-   cd spm
-   Create a Virtual Environment:
-
-Bash
-python3 -m venv .venv
-Activate the Virtual Environment:
-
-macOS / Linux:
-
-Bash
-source .venv/bin/activate
-Windows (Command Prompt / Git Bash):
-
-DOS
-.venv\Scripts\activate
-Windows (PowerShell):
-
-PowerShell
-.venv\Scripts\Activate.ps1
-Install Dependencies:
-
-Bash
-pip install --upgrade pip
-pip install streamlit tensorflow numpy pillow matplotlib pandas
-File & Directory Requirements
-Ensure your workspace contains the required sample patches and trained model weights before running:
-
-Plaintext
-spm/
-├── interface/
-│   ├── app.py
-│   ├── segmentation_metrics.py
-│   └── samples/                    <-- Ensure 12 .npz sample patches are here
-│       ├── patch_105_6_by_5...npz
-│       └── ...
-└── model/
-    ├── full_best.keras             <-- Place U-Net model checkpoint here
-    └── band_stats.json             <-- Place normalization statistics here
-3. Running the Streamlit App
-Launch the application using Streamlit:
-
-Bash
-streamlit run interface/app.py --server.fileWatcherType none
-The interface will automatically open in your default browser at http://localhost:8501.
 
 ## Team
 
